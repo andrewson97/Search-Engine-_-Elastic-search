@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="si">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+        <link rel="stylesheet" href="../static/style.css" />
+    </head>
+    <body>
+        <div class="container">
+            {% if message %}
+            <p class="message">{{ message | safe }}</p>
+            {% endif %}
+            <h2 class="header">Vijay Antony Mania ___ Hits of Vijay Antony</h2>
+            <form action="/search" method="POST">
+              <div class="form-group" lang="si">
+                <h3>search</h3>
+                <input
+                  type="text"
+                  name="query"
+                  placeholder="enter"
+                />
+              </div>
+            </form>
+            {% if response!=None %}
+
+
+            {% for res in response['hits']['hits']%}
+            <div class="result">
+               <p>பாடல்: {{res['_source']['பாடல்']}}</p>
+               <p>பாடலாசிரியர்: {{res['_source']['பாடலாசிரியர்']}}</p>
+               <p>இசையமைப்பாளர்: {{res['_source']['இசையமைப்பாளர்']}}</p>
+               <p>திரைப்படம்: {{res['_source']['திரைப்படம்']}}</p>
+               <p>வருடம்: {{res['_source']['வருடம்']}}</p>
+               <p>பாடல்வரிகள்: {{res['_source']['பாடல்வரிகள்']}}</p>
+            </div>
+            {% endfor %}
+            {% endif %}
+        </div>
+    </body>
+</html>
